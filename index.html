@@ -56,6 +56,20 @@
         function changeText() {
             document.getElementById("demo").innerHTML = "Text changed using JavaScript!";
         }
+
+        const baseUrl = "https://script.google.com/macros/s/AKfycbwvyK4Jp6rA1coAs6JuJYYKGkxXCw31Kn8NPne1Jhjtpyw6K5a1alQ5ENRcYjHFdx7i/exec";  // Please set your Web Apps URL.
+        const para = {
+          spreadsheetId: "1FrMxCZXaAeOTbbAnqhvOpJTcjOCrQBHGq4TRTu46XNo",  // Please set your Google Spreadsheet ID.
+          sheetName: "Sheet1"  // Please set the sheet name you want to retrieve the values.
+        };
+        const q = new URLSearchParams(para);
+        const url = baseUrl + "?" + q;
+        fetch(url)
+          .then(res => res.json())
+          .then(res => {
+            const values = res.values;
+            console.log(values);
+          });
     </script>
 
 </body>
