@@ -44,8 +44,8 @@
     <main>
         <p>Welcome to my simple website! Feel free to explore.</p>
 
-        <button onclick="changeText()">Click me</button>
-        <p id="demo">JavaScript can change this text!</p>
+        <button onclick="getData()">Get Data</button>
+        <p id="demo">Retrieved data will show up in the console</p>
     </main>
 
     <footer>
@@ -53,23 +53,21 @@
     </footer>
 
     <script>
-        function changeText() {
-            document.getElementById("demo").innerHTML = "Text changed using JavaScript!";
+        function getData() {
+            const baseUrl = "https://script.google.com/macros/s/AKfycbwvyK4Jp6rA1coAs6JuJYYKGkxXCw31Kn8NPne1Jhjtpyw6K5a1alQ5ENRcYjHFdx7i/exec";  // Please set your Web Apps URL.
+            const para = {
+              spreadsheetId: "1FrMxCZXaAeOTbbAnqhvOpJTcjOCrQBHGq4TRTu46XNo",  // Please set your Google Spreadsheet ID.
+              sheetName: "Sheet1"  // Please set the sheet name you want to retrieve the values.
+            };
+            const q = new URLSearchParams(para);
+            const url = baseUrl + "?" + q;
+            fetch(url)
+              .then(res => res.json())
+              .then(res => {
+                const values = res.values;
+                console.log(values);
+              });
         }
-
-        const baseUrl = "https://script.google.com/macros/s/AKfycbwvyK4Jp6rA1coAs6JuJYYKGkxXCw31Kn8NPne1Jhjtpyw6K5a1alQ5ENRcYjHFdx7i/exec";  // Please set your Web Apps URL.
-        const para = {
-          spreadsheetId: "1FrMxCZXaAeOTbbAnqhvOpJTcjOCrQBHGq4TRTu46XNo",  // Please set your Google Spreadsheet ID.
-          sheetName: "Sheet1"  // Please set the sheet name you want to retrieve the values.
-        };
-        const q = new URLSearchParams(para);
-        const url = baseUrl + "?" + q;
-        fetch(url)
-          .then(res => res.json())
-          .then(res => {
-            const values = res.values;
-            console.log(values);
-          });
     </script>
 
 </body>
